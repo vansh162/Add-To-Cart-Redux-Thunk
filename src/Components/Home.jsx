@@ -6,6 +6,7 @@
 
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { API_PRODUCTS_URL } from "../config/api.js";
 
 const Home = () => {
   const [data, setData] = useState([]);
@@ -24,9 +25,11 @@ const Home = () => {
   }, []);
 
   function getData() {
-    axios.get("http://localhost:3004/product").then((res) => {
+    axios.get(API_PRODUCTS_URL).then((res) => {
       setData(res.data);
       setOgData(res.data);
+    }).catch((error) => {
+      console.error("Error fetching products:", error);
     });
   }
 
